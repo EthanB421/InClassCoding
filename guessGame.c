@@ -50,17 +50,11 @@ int userGuess(){
         printf("You guessed too high! The number is smaller. ");
         scanf("%d", &guess);
         scanf("%c", quit);
-         if (quit == 'q'){
-             printf("mode");
-         }
         userGuess();
     }else if(guess<randInt){
         printf("You guessed to low! The number is higher. ");
         scanf("%d", &guess);
          scanf("%c", quit);
-        if (quit == 'q'){
-             printf("mode");
-         }
         userGuess();
     }else if(guess==randInt){
         printf("You guessed the right number! \n");
