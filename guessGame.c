@@ -14,7 +14,7 @@ int guess;
 time_t t;
 int randInt;
 int max;
-char quit;
+FILE *fp;
 
 
 
@@ -25,6 +25,9 @@ int main(){
 }
 
 int mainMenu(){
+    fp = fopen("maxFile.txt", "r");
+    fscanf(fp, "%d", &max);
+    fclose(fp);
     srand((unsigned) time(&t));
     randInt = rand() % max;
     if(randInt==0){
@@ -46,21 +49,13 @@ return 0;
 }
 
 int userGuess(){
-    if (guess>randInt){
+     if (guess>randInt){
         printf("You guessed too high! The number is smaller. ");
         scanf("%d", &guess);
-        scanf("%c", quit);
-         if (quit == 'q'){
-             printf("mode");
-         }
         userGuess();
     }else if(guess<randInt){
         printf("You guessed to low! The number is higher. ");
         scanf("%d", &guess);
-         scanf("%c", quit);
-        if (quit == 'q'){
-             printf("mode");
-         }
         userGuess();
     }else if(guess==randInt){
         printf("You guessed the right number! \n");
@@ -73,7 +68,8 @@ int gameActual(){
         printf("\nGuess an integer 1-10");
     }else{
     printf("\nGuess an integer 1-%d: ", max);
-    }scanf("%d", &guess);
+    }
+    scanf("%d", &guess);
     userGuess();
 }
 
@@ -84,6 +80,8 @@ if(max<1 || max>2147483647){
     printf("This is an invalid max number, please try again! ");
     scanf("%d", &max);
 }
+    fp = fopen("maxFile.txt", "w+");
+    fprintf(fp, "%d", max);
 mainMenu();
 
 }
